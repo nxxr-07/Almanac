@@ -1,0 +1,22 @@
+{% extends "base.html"  %} {% block title  %}Library{% endblock %}
+
+{% block content %}
+
+    <h2>Library</h2>
+    <ul>
+        {% for file in pdf_files %}
+        
+            <li>
+                <div class="files">
+                {{ file.author }} - Owner: {{ User.query.get(file.user_id).first_name }}
+                <a href="{{ url_for('views.download_pdf', filename=file.author) }}">
+                    <img src="https://cdn3.iconfinder.com/data/icons/sympletts-part-3/128/cloud-download-512.png" alt="Download" height="32"  >
+                </a>
+                </div>
+            </li>
+        
+        {% endfor %}
+    </ul>
+
+    
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html"  %} {% block title  %}Assignments{% endblock %}
+
+{% block content %}
+    <h1>Assignments</h1>
+    
+        {% for a in assigns %}
+        <div class="alert alert-dark" role="alert">
+            
+            {{ a.title }}
+            {{ a.subject }}
+            {{ a.deadline }}
+            {{ a.description }}
+            ~ POSTED BY {{ all_users.query.get(a.id).first_name }}
+            
+            
+        </div>
+        {% endfor %}
+
+
+    
+        {% block posting %}
+        <div class=" fixed-bottom" >
+            <form method="POST" action="/publish-assign">
+                <span class="d-block p-2 bg-dark text-white">
+                <h5>Post New Assignment</h5>
+                <input name='title' placeholder="Title">
+                <input name='subject' placeholder="Subject">
+                <input name='deadline'  type="date" placeholder="Due Date">
+                <br />
+                <br />
+                <textarea name="description" class="form-control" placeholder="Enter Assignment Description..."></textarea> 
+                <br />
+                <button type="submit" class="btn btn-light">Publish</button>
+                </span>
+            </form>
+
+        </div>
+        {% endblock %}
+{% endblock %}
